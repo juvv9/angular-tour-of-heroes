@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 
-// import { HEROES } from '../mock-heroes';
+// import { HEROES } from '../mock-heroes'; HeroSetviceに変更のため削除
 import { HeroService } from '../hero.service';
 
 
@@ -16,13 +16,15 @@ export class HeroesComponent implements OnInit {
     name: 'Windstorm'
   };
 
-  // heroes = HEROES;
-  heroes: Hero[] = [];
+  // heroes = HEROES; HeroSetviceに変更のため削除
+  heroes: Hero[] = []; //変更後
 
   
   constructor(private heroService: HeroService) { }
 
   ngOnInit() {
+    // getHeroesを呼び出し
+    this.getHeroes();
   }
 
   selectedHero?: Hero;
