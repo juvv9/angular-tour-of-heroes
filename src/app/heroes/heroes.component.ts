@@ -4,6 +4,9 @@ import { Hero } from '../hero';
 // import { HEROES } from '../mock-heroes'; HeroSetviceに変更のため削除
 import { HeroService } from '../hero.service';
 
+import { MessageService } from '../message.service';
+
+
 
 @Component({
   selector: 'app-heroes',
@@ -16,20 +19,26 @@ export class HeroesComponent implements OnInit {
     name: 'Windstorm'
   };
 
+  selectedHero?: Hero;
+
   // heroes = HEROES; HeroSetviceに変更のため削除
   heroes: Hero[] = []; //変更後
 
   
-  constructor(private heroService: HeroService) { }
+  constructor(
+    private heroService: HeroService,
+    private messageService: MessageService,
+    ) { }
 
   ngOnInit() {
     // getHeroesを呼び出し
     this.getHeroes();
   }
 
-  selectedHero?: Hero;
+  
   onSelect(hero: Hero): void {
   this.selectedHero = hero;
+  this.messageService.add(`HeroesComponent: Selected hero id=${hero.id} 文字列2`);
   }
 
   // getHeroes(): void {
