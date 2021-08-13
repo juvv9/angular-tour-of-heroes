@@ -24,8 +24,15 @@ export class HeroService {
   // }
 
   //サーバからのレスポンス 非同期処理
+  // getHeroes(): Observable<Hero[]> {
+  //   const heroes = of(HEROES);
+  //   return heroes;
+  // }
+
+  // HeroService からメッセージを送る
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
+    this.messageService.add('HeroService: fetched heroes');
     return heroes;
   }
 }
