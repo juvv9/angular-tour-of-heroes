@@ -37,11 +37,14 @@ export class HeroesComponent implements OnInit {
   }
 
   
-  onSelect(hero: Hero): void {
-  this.selectedHero = hero;
-  this.messageService.add(`HeroesComponent: Selected hero id=${hero.id} 文字列2`);
-  }
+  // onSelect(hero: Hero): void {
+  // this.selectedHero = hero;
+  // this.messageService.add(`HeroesComponent: Selected hero id=${hero.id} 文字列2`);
+  // }
 
+
+
+  
   // getHeroes(): void {
   //   this.heroes = this.heroService.getHeroes();
   // }
