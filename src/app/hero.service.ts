@@ -32,7 +32,7 @@ export class HeroService {
   // HeroService からメッセージを送る
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES); //HEROES→モックヒーロー
-    this.messageService.add('HeroService: fetched heroes 文字列');
+    this.messageService.add('HeroService: fetched heroes 文字列'); //messageService呼び出し
     return heroes;
   }
 }
