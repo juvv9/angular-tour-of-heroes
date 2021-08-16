@@ -59,7 +59,7 @@ export class HeroService {
   //   this.messageService.add(`HeroService: fetched hero id=${id}`);
   //   return of(hero);
   // }
-  
+
   /** IDによりヒーローを取得する。見つからなかった場合は404を返却する。 */
   getHero(id: number): Observable<Hero> {
   const url = `${this.heroesUrl}/${id}`;
@@ -93,8 +93,19 @@ export class HeroService {
 
     // 空の結果を返して、アプリを持続可能にする
     return of(result as T);
-  };
-}
+    };
+  }
 
+  /** PUT: サーバー上でヒーローを更新 */
+  updateHero(hero: Hero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
 }
