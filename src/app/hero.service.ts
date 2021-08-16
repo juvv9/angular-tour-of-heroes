@@ -31,7 +31,7 @@ export class HeroService {
 
   // HeroService からメッセージを送る
   getHeroes(): Observable<Hero[]> {
-    const heroes = of(HEROES);
+    const heroes = of(HEROES); //HEROES→モックヒーロー
     this.messageService.add('HeroService: fetched heroes 文字列');
     return heroes;
   }

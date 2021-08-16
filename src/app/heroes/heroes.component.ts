@@ -14,6 +14,7 @@ import { MessageService } from '../message.service';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
+  //上部
   hero: Hero = {
     id: 1,
     name: 'Windstorm'
