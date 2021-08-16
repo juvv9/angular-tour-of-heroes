@@ -47,6 +47,7 @@ export class HeroService {
   getHeroes(): Observable<Hero[]> {
   return this.http.get<Hero[]>(this.heroesUrl)
     .pipe(
+      tap(heroes => this.log('fetched heroes'),
       catchError(this.handleError<Hero[]>('getHeroes', []))
   );
   }
@@ -72,8 +73,8 @@ export class HeroService {
  * @param operation - 失敗した操作の名前
  * @param result - observableな結果として返す任意の値
  */
-private handleError<T>(operation = 'operation', result?: T) {
-  return (error: any): Observable<T> => {
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
     // TODO: リモート上のロギング基盤にエラーを送信する
     console.error(error); // かわりにconsoleに出力
