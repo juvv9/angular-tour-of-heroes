@@ -9,6 +9,8 @@ import { Observable, of } from 'rxjs';
 //MessageServiceを注入
 import { MessageService } from './message.service';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,9 @@ import { MessageService } from './message.service';
 export class HeroService {
 
   constructor(
-    private messageService: MessageService
+    private http: HttpClient,
+    private messageService: MessageService,
+    
   ) { }
 
   // getHeroes(): Hero[] {
@@ -30,10 +34,15 @@ export class HeroService {
   // }
 
   // HeroService からメッセージを送る
+  // getHeroes(): Observable<Hero[]> {
+  //   const heroes = of(HEROES); //HEROES→モックヒーロー
+  //   this.messageService.add('HeroService: fetched heroes 文字列'); //messageService呼び出し
+  //   return heroes;
+  // }
+
+  /** サーバーからヒーローを取得する */
   getHeroes(): Observable<Hero[]> {
-    const heroes = of(HEROES); //HEROES→モックヒーロー
-    this.messageService.add('HeroService: fetched heroes 文字列'); //messageService呼び出し
-    return heroes;
+  return this.http.get<Hero[]>(this.heroesUrl)
   }
 
   getHero(id: number): Observable<Hero> {
@@ -43,4 +52,13 @@ export class HeroService {
     this.messageService.add(`HeroService: fetched hero id=${id}`);
     return of(hero);
   }
+
+  /** HeroServiceのメッセージをMessageServiceを使って記録 */
+  private log(message: string) {
+  this.messageService.add(`HeroService: ${message}`);
+  }
+
+  private heroesUrl = 'api/heroes';  // Web APIのURL
+
+
 }
